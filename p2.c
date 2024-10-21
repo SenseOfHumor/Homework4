@@ -100,7 +100,7 @@ void radix_hex(unsigned long long int A[], unsigned int n, unsigned int k){
 
        //printf("\nSorted array (signed): ");
         for (int i = 0 ; i < n ; i++){
-            printf("%lld \n", A[i]);
+            printf("%lld\n", A[i]);
         }
     }
 
