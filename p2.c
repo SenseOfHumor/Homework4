@@ -12,7 +12,7 @@ void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
     unsigned int mask, count0, count1, count2, count3, count4, count5, count6, count7, count8, count9, countA, countB, countC, countD, countE, countF;
 
     for (int d = 0; d < k ; d+= 4){
-        int counter = 0;
+        //int counter = 0;
         mask = 0xF;
         count0 = count1 = count2 = count3 = count4 = count5 = count6 = count7 = count8 = count9 = countA = countB = countC = countD = countE = countF = 0;
     //     //loop thru individual elements
@@ -176,9 +176,53 @@ void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
         //extractig the 4bit digit for each pass
         int digit = (A[i] >> d) & mask; //shift first then mask
 
-        switch (digit)
+        switch (digit){
+            case 0: bucket0[count0++] = A[i]; break; //storing in appt buckets
+            case 1: bucket1[count1++] = A[i]; break;
+            case 2: bucket2[count2++] = A[i]; break;
+            case 3: bucket3[count3++] = A[i]; break;
+            case 4: bucket4[count4++] = A[i]; break;
+            case 5: bucket5[count5++] = A[i]; break;
+            case 6: bucket6[count6++] = A[i]; break;
+            case 7: bucket7[count7++] = A[i]; break;
+            case 8: bucket8[count8++] = A[i]; break;
+            case 9: bucket9[count9++] = A[i]; break;
+            case 10: bucketA[countA++] = A[i]; break;
+            case 11: bucketB[countB++] = A[i]; break;
+            case 12: bucketC[countC++] = A[i]; break;
+            case 13: bucketD[countD++] = A[i]; break;
+            case 14: bucketE[countE++] = A[i]; break;
+            case 15: bucketF[countF++] = A[i]; break;
+        }
+
     }
 
+    //copy to original arr
+    //only if C had a F string format like python, i would have constructed 
+    //a string of the bucket names and used that to loop thru the buckets
+    //this entire code would have been simpler :( :/ :o :(
+    for (int i = 0 ; i < count0; i++) A[counter++] = bucket0[i];
+    for (int i = 0 ; i < count1; i++) A[counter++] = bucket1[i];
+    for (int i = 0 ; i < count2; i++) A[counter++] = bucket2[i];
+    for (int i = 0 ; i < count3; i++) A[counter++] = bucket3[i];
+    for (int i = 0 ; i < count4; i++) A[counter++] = bucket4[i];
+    for (int i = 0 ; i < count5; i++) A[counter++] = bucket5[i];
+    for (int i = 0 ; i < count6; i++) A[counter++] = bucket6[i];
+    for (int i = 0 ; i < count7; i++) A[counter++] = bucket7[i];
+    for (int i = 0 ; i < count8; i++) A[counter++] = bucket8[i];
+    for (int i = 0 ; i < count9; i++) A[counter++] = bucket9[i];
+    for (int i = 0 ; i < countA; i++) A[counter++] = bucketA[i];
+    for (int i = 0 ; i < countB; i++) A[counter++] = bucketB[i];
+    for (int i = 0 ; i < countC; i++) A[counter++] = bucketC[i];
+    for (int i = 0 ; i < countD; i++) A[counter++] = bucketD[i];
+    for (int i = 0 ; i < countE; i++) A[counter++] = bucketE[i];
+    for (int i = 0 ; i < countF; i++) A[counter++] = bucketF[i];
+
+    }
+
+    printf("\nSorted array: ");
+    for (int i = 0 ; i < n ; i++){
+        printf("%d ", A[i]);
     }
 }
 
