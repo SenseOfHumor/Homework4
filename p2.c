@@ -4,8 +4,8 @@
 #define MAX 100
 
 //reusing the code done in class but with cases for hex (since writing 16 for loop is a pain)
-void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
-    unsigned int bucket0[MAX], bucket1[MAX], bucket2[MAX], bucket3[MAX], bucket4[MAX], bucket5[MAX], bucket6[MAX], bucket7[MAX], bucket8[MAX], bucket9[MAX], bucketA[MAX], bucketB[MAX], bucketC[MAX], bucketD[MAX], bucketE[MAX], bucketF[MAX];
+void radix_hex(unsigned long long int A[], unsigned int n, unsigned int k){
+    unsigned long long int bucket0[MAX], bucket1[MAX], bucket2[MAX], bucket3[MAX], bucket4[MAX], bucket5[MAX], bucket6[MAX], bucket7[MAX], bucket8[MAX], bucket9[MAX], bucketA[MAX], bucketB[MAX], bucketC[MAX], bucketD[MAX], bucketE[MAX], bucketF[MAX];
     unsigned int mask, count0, count1, count2, count3, count4, count5, count6, count7, count8, count9, countA, countB, countC, countD, countE, countF;
 
     for (int d = 0; d < k ; d+= 4){
@@ -16,8 +16,9 @@ void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
     //looping thu individual elements and storing them into buckets 
     for (int i = 0 ; i < n ; i++){
         //extractig the 4bit digit for each pass
-                mask = 0xF >> d;
-        int digit = (A[i]) & mask; 
+                long long mask = 0xF;
+        int digit = (A[i] >> d) & 0xF;
+
 
         switch (digit){
             case 0: bucket0[count0++] = A[i]; break; //storing in appt buckets
@@ -71,8 +72,8 @@ void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
 
     //copid the code from class to handle the negative and positive separation and sorting\
      then merging in reverse order for the negative numbers
-    void radix_sort_signed(int A[], int n, int K){
-        int positive[MAX], negative[MAX];
+    void radix_sort_signed(long long int A[], int n, int K){
+        long long int positive[MAX], negative[MAX];
         int neg_count = 0, pos_count = 0;
 
         //separate positive and negative numbers
@@ -86,8 +87,8 @@ void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
             }
         }
 
-        radix_hex(positive, pos_count, K);
-        radix_hex(negative, neg_count, K);
+    radix_hex((unsigned long long *)positive, pos_count, K);
+    radix_hex((unsigned long long *)negative, neg_count, K);
 
         for(int i = neg_count -1; i >= 0; i--){
             A[neg_count - i -1] = ~negative[i]; //negating back to get the original number
@@ -97,24 +98,24 @@ void radix_hex(unsigned int A[], unsigned int n, unsigned int k){
             A[neg_count + i] = positive[i];
         }
 
-       // printf("\nSorted array (signed): ");
+       //printf("\nSorted array (signed): ");
         for (int i = 0 ; i < n ; i++){
-            printf("%d \n", A[i]);
+            printf("%lld \n", A[i]);
         }
     }
 
 int main(){
-    printf("Enter the count of the elements: ");
+    //printf("Enter the count of the elements: ");
     int n;
     scanf("%d",&n);
     // int elem_counter = 0;
 
-    int primary_arr[100]; //the q states that elements <= 100
+    long long int primary_arr[100]; //the q states that elements <= 100
 
     
     for (int i=0; i<n; i++){
-        printf("Enter the %d-th element: ", i+1); //avoid the 0
-    scanf("%d",&primary_arr[i]);}
+        //printf("Enter the %d-th element: ", i+1); //avoid the 0
+    scanf("%lld",&primary_arr[i]);}
 
     //err handling
     if (n < 1 || n > 100)
@@ -126,5 +127,5 @@ int main(){
     //     printf("%d ", primary_arr[i]);
     // printf("\n");
 
-    radix_sort_signed(primary_arr, n, 32);
+    radix_sort_signed(primary_arr, n, 64);
 }
