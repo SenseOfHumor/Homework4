@@ -1,2 +1,4 @@
-radix_hex((unsigned long long *)positive, pos_count, K);
-    radix_hex((unsigned long long *)negative, neg_count, K);
+    // printf("\nSorted array: ");
+    // for (int i = 0 ; i < n ; i++){
+    //     printf("%d ", A[i]);
+    // }
