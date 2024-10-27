@@ -10,7 +10,7 @@ do
 printf "%d.%d\n" $((($RANDOM-$RANDOM)%1000)) $RANDOM
 done | tee -a input
 echo "============= execution result ================"
-cat input | /home/dream/Documents/C/Homework4/p1 | xargs printf "%.2f\n" | tee your_output
+cat input | /home/dream/Documents/C/Homework4/p11 | xargs printf "%.2f\n" | tee your_output
 tail -n +2 input | sort -n | xargs printf "%.2f\n" > standard_output
 echo "====== differences from correct result ======="
 diff your_output standard_output
